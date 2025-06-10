@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: rgb(153, 204, 234);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2980b9;
+    }
+
+    form div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      color: white;
+      background-color: #3498db;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Login</h1>
+    <form onsubmit="return handleLogin()">
+      <div>
+        <label for="name">Name:</label>
+        <input id="name" type="text" required />
+      </div>
+
+      <div>
+        <label for="pass">Password:</label>
+        <input id="pass" type="password" required />
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const  name = document.getElementById("name").value;
+      const password = document.getElementById("pass").value;
+
+      const storedUser = JSON.parse(localStorage.getItem("userCredentials"));
+      if (!storedUser) {
+        alert("No user registered. Please sign up first.");
+        return false;
+      }
+      
+      if (name === storedUser.name && password === storedUser.password) {
+        alert("Login successful!");
+        window.location.href = "bookAppointment.html";
+      } else {
+        alert("Invalid credentials.");
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
