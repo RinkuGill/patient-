@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prescriptions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .prescription-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .prescription-card h2 {
+      color: #2980b9;
+      margin-bottom: 10px;
+    }
+
+    .prescription-card p {
+      margin: 5px 0;
+      line-height: 1.5;
+    }
+
+    .prescription-card .date {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-top: 5px;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Prescriptions</h1>
+  <div id="prescriptionsContainer"></div>
+
+  <script>
+    const fallbackPrescriptions = [
+      {
+        doctor: "Dr. Taranya",
+        date: "2025-06-05",
+        patient: "Pragyan",
+        diagnosis: "Fever and Sore Throat",
+        medicines: [
+          "Paracetamol 500mg - Twice daily after meals",
+          "Cough Syrup - 5ml before sleep"
+        ]
+      },
+      {
+        doctor: "Dr. Priyesh",
+        date: "2025-06-02",
+        patient: "Simi",
+        diagnosis: "Migraine",
+        medicines: [
+          "Sumatriptan 50mg - Once during headache",
+          "Multivitamin - Daily in morning"
+        ]
+      }
+    ];
+
+    const prescriptionsContainer = document.getElementById('prescriptionsContainer');
+    const prescriptions = JSON.parse(localStorage.getItem('prescriptions')) || fallbackPrescriptions;
+
+    prescriptions.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'prescription-card';
+      card.innerHTML = `
+        <h2>${p.doctor}</h2>
+        <div class="date">Date: ${p.date}</div>
+        <p><strong>Patient:</strong> ${p.patient}</p>
+        <p><strong>Diagnosis:</strong> ${p.diagnosis}</p>
+        <p><strong>Medicines:</strong></p>
+        <ul>
+            ${p.medicines.map(med => `<li>${med}</li>`).join('')}
+        </ul>
+      `;
+      prescriptionsContainer.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
