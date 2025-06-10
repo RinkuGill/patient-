@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #a9d5e0;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #348f37;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+    <h2 style = "text-align:center;">BOOK APPOINTMENT</h2>
+    <form onsubmit = "return handleAppointment()">
+        <div> 
+            <label for="doctor">Select Doctor: 
+                <select id = "doctor" name = "doctor" required>
+                    <option value="">--Select a doctor--</option>
+                    <option value="dr. Sandhya">Dr. Sandhya</option>
+                    <option value="dr. Rajesh">Dr. Rajesh</option>
+                    <option value="dr. Taranya">Dr. Taranya</option>
+                    <option value="dr. Priyesh">Dr. Priyesh</option>
+                </select>
+            </label>
+        </div>
+
+        <div> 
+            <label for="date">Date: </label>
+            <input id="date" type="date" required>
+        </div>
+
+        <div> 
+            <label for="time">Time: </label>
+            <input id="time" type="time" required>
+        </div>
+
+        <button type = "Submit">Book Appointment</button>
+    </form>
+    <script>
+      function handleAppointment(){
+        const doctor = document.getElementById("doctor").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+
+        const appointment = {
+          doctor: document.getElementById("doctor").value,
+          date: document.getElementById("date").value,
+          time: document.getElementById("time").value
+        };
+
+        let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+        appointments.push(appointment);
+        localStorage.setItem("appointments", JSON.stringify(appointments));
+
+        window.location.href = "view.html";
+        return false;
+      }
+    </script>
+</body>
+</html>
